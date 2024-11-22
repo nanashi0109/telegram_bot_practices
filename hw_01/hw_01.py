@@ -1,0 +1,1 @@
+from resources.config import TOKEN_HW_1_1
