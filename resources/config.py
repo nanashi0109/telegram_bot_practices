@@ -1,2 +1,2 @@
-TOKEN_HW_1_1 = ""
+TOKEN_HW_1_1 = "7782812445:AAGTfDohh4iesAfyVulKqlDc_o7qjcLx7Gs"
 TOKEN_HW_1_2 = ""
