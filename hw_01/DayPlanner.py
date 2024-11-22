@@ -26,7 +26,7 @@ def add_user_at_tasks(user_id: int) -> None:
 @dispatcher.message(Command("start"))
 async def start_handler(message: types.Message) -> None:
     add_user_at_tasks(message.chat.id)
-    await message.answer("Бот помогает пользователю составить план дня, добавляя задачи с указанием времени и пометками о приоритете.")
+    await message.answer("Бот помогает пользователю составить план дня, добавляя задачи с указанием времени и пометками о приоритете")
 
 
 @dispatcher.message(Command("help"))
@@ -48,9 +48,9 @@ def get_commands_string() -> str:
 async def add_task_handler(message: types.Message, command: CommandObject):
     add_user_at_tasks(message.chat.id)
 
-    error_message = "Неверные аргументы. Воспользуйтесь командой /help"
+    error_message = "Неверные аргументы для команды. Для подробной информации воспользуйся командой /help"
 
-    if command is None:
+    if command.args is None:
         await message.answer(error_message)
         return
     command = command.args.split(" ", 1)
@@ -78,7 +78,7 @@ async def show_tasks_handler(message: types.Message):
     tasks_times = list(tasks.keys())
     tasks_times = snail_sorting(tasks_times, key=lambda x: str(x), order_by=lambda x, y: x > y)
 
-    tasks_string = "Ваши задачаи:\n"
+    tasks_string = "Ваши задачи:\n"
     for i in tasks_times:
         tasks_string += f"{i}: {tasks[i]}\n"
 
@@ -105,9 +105,9 @@ def snail_sorting(collection: list, key: lambda x: str(x), order_by: lambda x, y
 
 @dispatcher.message(Command("remove_task"))
 async def remove_task_handler(message: types.Message, command: CommandObject):
-    error_message = "Неверные аргументы. Воспользуйтесь командой /help"
+    error_message = "Неверные аргументы для команды. Для подробной информации воспользуйся командой /help"
 
-    if command is None:
+    if command.args is None:
         await message.answer(error_message)
         return
 
@@ -131,9 +131,14 @@ async def clear_tasks_handler(message: types.Message):
     try:
         del users_tasks[message.chat.id]
         add_user_at_tasks(message.chat.id)
-        await message.answer("Задачи очищены.")
+        await message.answer("Задачи очищены")
     except KeyError:
-        await message.answer("У вас нет задач.")
+        await message.answer("У вас нет задач")
+
+
+@dispatcher.message(F.text)
+async def other_text_hanler(message: types.Message):
+    await message.answer("Неверная команда.\n Для просмотра списка комманд воспользуйся /help")
 
 
 async def main():
