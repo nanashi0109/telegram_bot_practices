@@ -41,7 +41,7 @@ async def show_handler(message: types.Message, state: FSMContext):
         return
 
     for feedback in feedbacks:
-        await message.answer(feedback.get_stats)
+        await message.answer(feedback.get_stats())
 
 
 @router.message(StateFilter(None), Command("feedback"))

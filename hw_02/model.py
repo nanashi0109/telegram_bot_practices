@@ -19,7 +19,7 @@ class FeedbackModel:
     def __str__(self):
         return f"{self.__general_impression}, {self.__grade}, {self.__comment}"
 
-    def get_stats(self):
+    def get_stats(self) -> str:
         result = (f"Общие впечатления: {self.__general_impression} \n"
                   f"Оценка: {self.__grade} \n"
                   f"Комментарий: {self.__comment}")
