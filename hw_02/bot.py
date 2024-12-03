@@ -3,7 +3,7 @@ from resources.config import TOKEN_2
 
 from aiogram import Bot, Dispatcher
 
-from hw_02.handlers.start_commands import router as start_router
+from hw_02.handlers.feedback_handlers import router as start_router
 
 
 async def main():

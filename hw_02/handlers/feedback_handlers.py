@@ -44,14 +44,8 @@ async def show_handler(message: types.Message, state: FSMContext):
         await message.answer(feedback.get_stats())
 
 
-@router.message(StateFilter(None), Command("feedback"))
-async def feedback_handler(message: types.Message, state: FSMContext):
-    await message.answer("Опишите свои впечатления")
-
-    await state.set_state(FeedbackStates.general_impression)
-
-
 @router.message(StateFilter(None), F.text == "Оставить отзыв")
+@router.message(StateFilter(None), Command("feedback"))
 async def feedback_handler(message: types.Message, state: FSMContext):
     await message.answer("Опишите свои впечатления")
 
