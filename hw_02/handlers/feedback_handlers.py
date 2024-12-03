@@ -68,10 +68,11 @@ async def grade_handler(callback: types.CallbackQuery, state: FSMContext):
 
     message = callback.message
     await message.delete_reply_markup()
-
     await message.answer("Оставьте комментарий")
 
     await state.set_state(FeedbackStates.commenting)
+
+    await callback.answer()
 
 
 @router.message(StateFilter(FeedbackStates.commenting), F.text)
